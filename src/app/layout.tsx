@@ -24,7 +24,11 @@ export default function RootLayout({
         <Providers>
           <Stack h='100%' overflowY='auto'>
             <Header />
-            <Box overflowY='auto'>{children}</Box>
+
+            <Box overflowY='auto' flex={1} px={[2, 4, 8]}>
+              {children}
+            </Box>
+
             <Footer />
           </Stack>
         </Providers>

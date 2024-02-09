@@ -1,14 +1,14 @@
 'use client'
 
 import { useTaskStore } from '@/stores/taskStore'
-import { Box, Checkbox } from '@chakra-ui/react'
+import { Checkbox, Flex } from '@chakra-ui/react'
 
 export const Footer = () => {
   const showDone = useTaskStore((s) => s.showDone)
   const toggleShowDone = useTaskStore((s) => s.toggleShowDone)
 
   return (
-    <Box
+    <Flex
       as='footer'
       mt='auto'
       height={['40px', '60px']}
@@ -20,6 +20,6 @@ export const Footer = () => {
       <Checkbox isChecked={showDone} onChange={toggleShowDone}>
         Show completed tasks
       </Checkbox>
-    </Box>
+    </Flex>
   )
 }

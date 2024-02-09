@@ -51,7 +51,6 @@ export const TaskForm = ({
       as='form'
       w={['100%', '100%', 600]}
       mx='auto'
-      px={[2, 4, 8]}
       py={[4, 4, 8]}
       gap={[4, 8]}
       alignItems='center'
