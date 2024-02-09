@@ -23,7 +23,7 @@ export default function Home() {
   }
 
   return (
-    <Stack px={[2, 4, 8]} py={[4, 4, 8]} gap={[4, 8]}>
+    <Stack py={[4, 4, 8]} gap={[4, 8]}>
       {tasks.map((task) => {
         if (!showDone && task.status === 'done') return null
 
