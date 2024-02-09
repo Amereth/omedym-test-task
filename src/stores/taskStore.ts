@@ -3,6 +3,9 @@ import { z } from 'zod'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+export const taskStatuses = ['todo', 'inProgress', 'done'] as const
+export type TaskStatus = (typeof taskStatuses)[number]
+
 export const taskModel = z.object({
   id: z.string(),
 
@@ -22,7 +25,7 @@ export const taskModel = z.object({
     .string()
     .refine(minDateNowValidator, 'Due date should be in the future.'),
 
-  status: z.enum(['todo', 'inProgress', 'done']),
+  status: z.enum(taskStatuses),
 
   priority: z.enum(['low', 'high']),
 })
@@ -32,6 +35,7 @@ export type Task = z.infer<typeof taskModel>
 type TaskStore = {
   tasks: Task[]
   createTask: (task: Task) => void
+  updateTaskStatus: (id: string, status: TaskStatus) => void
 }
 
 export const useTaskStore = create<TaskStore>()(
@@ -39,6 +43,12 @@ export const useTaskStore = create<TaskStore>()(
     (set) => ({
       tasks: [],
       createTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+      updateTaskStatus: (id, status) =>
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id ? { ...task, status } : task,
+          ),
+        })),
     }),
     { name: 'TASKS-STATE' },
   ),
