@@ -35,6 +35,7 @@ export type Task = z.infer<typeof taskModel>
 type TaskStore = {
   tasks: Task[]
   createTask: (task: Task) => void
+  updateTask: (task: Task) => void
   updateTaskStatus: (id: string, status: TaskStatus) => void
 }
 
@@ -43,6 +44,12 @@ export const useTaskStore = create<TaskStore>()(
     (set) => ({
       tasks: [],
       createTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
+
+      updateTask: (task) =>
+        set((state) => ({
+          tasks: state.tasks.map((t) => (t.id === task.id ? task : t)),
+        })),
+
       updateTaskStatus: (id, status) =>
         set((state) => ({
           tasks: state.tasks.map((task) =>

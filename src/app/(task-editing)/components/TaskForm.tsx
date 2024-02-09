@@ -23,18 +23,26 @@ type FormModel = z.infer<typeof formModel>
 
 type TaskFormProps = {
   onSubmit: (formValues: FormModel) => void
+  defaultValues?: Partial<FormModel>
+  submitButtonLabel?: string
 }
 
-export const TaskForm = ({ onSubmit }: TaskFormProps) => {
+const _defaultValues: TaskFormProps['defaultValues'] = {
+  status: 'todo',
+  priority: 'low',
+}
+
+export const TaskForm = ({
+  defaultValues = _defaultValues,
+  onSubmit,
+  submitButtonLabel = 'create',
+}: TaskFormProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormModel>({
-    defaultValues: {
-      status: 'todo',
-      priority: 'low',
-    },
+    defaultValues,
     resolver: zodResolver(formModel),
   })
 
@@ -102,7 +110,7 @@ export const TaskForm = ({ onSubmit }: TaskFormProps) => {
           </Button>
         </Link>
         <Button type='submit' colorScheme='green' size={['md', 'md', 'lg']}>
-          create
+          {submitButtonLabel}
         </Button>
       </Stack>
     </Stack>

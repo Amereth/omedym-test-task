@@ -6,8 +6,10 @@ import {
   Select,
   Box,
   Text,
+  IconButton,
+  Link,
 } from '@chakra-ui/react'
-import { AlertCircleIcon } from 'lucide-react'
+import { AlertCircleIcon, EditIcon } from 'lucide-react'
 
 const now = new Date()
 
@@ -60,6 +62,19 @@ export const TaskCard = ({ task, onStatusChange }: TaskCardProps) => {
             <option value='done'>Done</option>
           </Select>
         </Box>
+
+        <Tooltip label='Edit task'>
+          <Link href={`update-task/${task.id}`}>
+            <IconButton
+              as='span'
+              size='sm'
+              aria-label='Edit task'
+              color='gray.500'
+              icon={<EditIcon size={24} strokeWidth={1} />}
+              variant='ghost'
+            />
+          </Link>
+        </Tooltip>
       </Box>
 
       <Text as='span' fontSize={['lg', 'xl']}>
