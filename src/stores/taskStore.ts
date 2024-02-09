@@ -36,6 +36,7 @@ type TaskStore = {
   tasks: Task[]
   createTask: (task: Task) => void
   updateTask: (task: Task) => void
+  deleteTask: (id: string) => void
   updateTaskStatus: (id: string, status: TaskStatus) => void
 }
 
@@ -49,6 +50,9 @@ export const useTaskStore = create<TaskStore>()(
         set((state) => ({
           tasks: state.tasks.map((t) => (t.id === task.id ? task : t)),
         })),
+
+      deleteTask: (id) =>
+        set((state) => ({ tasks: state.tasks.filter((t) => t.id !== id) })),
 
       updateTaskStatus: (id, status) =>
         set((state) => ({

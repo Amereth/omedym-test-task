@@ -9,6 +9,7 @@ export default function Home() {
   const isLoggedIn = useUserStore((s) => s.isLoggedIn)
   const tasks = useTaskStore((s) => s.tasks)
   const updateTaskStatus = useTaskStore((s) => s.updateTaskStatus)
+  const deleteTask = useTaskStore((s) => s.deleteTask)
 
   if (!isLoggedIn) {
     return (
@@ -25,6 +26,7 @@ export default function Home() {
           key={task.id}
           task={task}
           onStatusChange={(status) => updateTaskStatus(task.id, status)}
+          onDeleteTask={() => deleteTask(task.id)}
         />
       ))}
     </Stack>

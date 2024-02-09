@@ -9,7 +9,7 @@ import {
   IconButton,
   Link,
 } from '@chakra-ui/react'
-import { AlertCircleIcon, EditIcon } from 'lucide-react'
+import { AlertCircleIcon, EditIcon, TrashIcon } from 'lucide-react'
 
 const now = new Date()
 
@@ -22,9 +22,14 @@ const taskCardBorderColorMap: Record<TaskStatus, string> = {
 type TaskCardProps = {
   task: Task
   onStatusChange: (status: TaskStatus) => void
+  onDeleteTask: () => void
 }
 
-export const TaskCard = ({ task, onStatusChange }: TaskCardProps) => {
+export const TaskCard = ({
+  task,
+  onStatusChange,
+  onDeleteTask,
+}: TaskCardProps) => {
   return (
     <Stack
       borderRadius={12}
@@ -72,8 +77,20 @@ export const TaskCard = ({ task, onStatusChange }: TaskCardProps) => {
               color='gray.500'
               icon={<EditIcon size={24} strokeWidth={1} />}
               variant='ghost'
+              ml={2}
             />
           </Link>
+        </Tooltip>
+
+        <Tooltip label='Edit task'>
+          <IconButton
+            onClick={onDeleteTask}
+            size='sm'
+            aria-label='Delete task'
+            color='gray.500'
+            icon={<TrashIcon size={24} strokeWidth={1} />}
+            variant='ghost'
+          />
         </Tooltip>
       </Box>
 
