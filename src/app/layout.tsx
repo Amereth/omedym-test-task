@@ -4,7 +4,7 @@ import { Providers } from './providers'
 import { Header } from '@/components/Header'
 import { Box, Stack } from '@chakra-ui/react'
 import { Footer } from '@/components/Footer'
-import './globals.css'
+import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
