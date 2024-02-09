@@ -1,3 +1,4 @@
+import { tasksMock } from '@/mock'
 import { minDateNowValidator } from '@/utils/validators'
 import { z } from 'zod'
 import { create } from 'zustand'
@@ -45,7 +46,7 @@ type TaskStore = {
 export const useTaskStore = create<TaskStore>()(
   persist(
     (set, get) => ({
-      tasks: [],
+      tasks: tasksMock,
       showDone: true,
 
       toggleShowDone: () => set({ showDone: !get().showDone }),
