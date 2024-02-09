@@ -34,6 +34,8 @@ export type Task = z.infer<typeof taskModel>
 
 type TaskStore = {
   tasks: Task[]
+  showDone: boolean
+  toggleShowDone: () => void
   createTask: (task: Task) => void
   updateTask: (task: Task) => void
   deleteTask: (id: string) => void
@@ -42,8 +44,12 @@ type TaskStore = {
 
 export const useTaskStore = create<TaskStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       tasks: [],
+      showDone: true,
+
+      toggleShowDone: () => set({ showDone: !get().showDone }),
+
       createTask: (task) => set((state) => ({ tasks: [...state.tasks, task] })),
 
       updateTask: (task) =>
