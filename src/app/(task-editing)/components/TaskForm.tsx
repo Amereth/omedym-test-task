@@ -1,7 +1,7 @@
 'use client'
 
 import { taskModel } from '@/stores/taskStore'
-import { getMinDate } from '@/utils/date'
+import { getMinDate } from '@/utils/getMinDate'
 import {
   Button,
   FormControl,
